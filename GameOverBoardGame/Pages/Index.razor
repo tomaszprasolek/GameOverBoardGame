@@ -1,7 +1,18 @@
 ﻿@page "/"
+@using GameOverBoardGame.Model;
 
-<h1>Hello, world!</h1>
+<h1>GameOver board game</h1>
 
-Welcome to your new app.
+@code {
+    GameBoard gameBoard = new GameBoard(2);
+}
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@*@foreach (Card card in gameBoard.ShuffledCards)*@
+@*{
+    <p>@card.ToString()</p>
+}*@
+
+@foreach (GamePiece piece in gameBoard.Board)
+{
+    <span>@piece.Style</span>
+}
