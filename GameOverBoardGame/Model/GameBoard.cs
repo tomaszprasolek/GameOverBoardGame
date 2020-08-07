@@ -20,8 +20,8 @@ namespace GameOverBoardGame.Model
             if (numberOfPlayers > 4)
                 throw new Exception("Za dużo graczy!");
 
-            Reset();
             this.numberOfPlayers = numberOfPlayers;
+            Reset();
         }
 
         private void Reset()
@@ -36,9 +36,9 @@ namespace GameOverBoardGame.Model
 
             int cardIdx = 0;
 
-            for (int i = 1; i <= 7; i++)
+            for (int i = 0; i < 7; i++)
             {
-                for (int j = 1; j <= 7; j++)
+                for (int j = 0; j < 7; j++)
                 {
                     if (IsPlayerPoint(i, j))
                     {
@@ -63,24 +63,24 @@ namespace GameOverBoardGame.Model
             {
                 return new List<Point>
                 {
-                    new Point(2, 1),
-                    new Point(6, 7)
+                    new Point(1, 0),
+                    new Point(5, 6)
                 };
             }
 
             return new List<Point>
             {
-                new Point(2, 1),
-                new Point(1, 6),
-                new Point(6, 7),
-                new Point(7, 2),
+                new Point(1, 0),
+                new Point(0, 5),
+                new Point(5, 6),
+                new Point(6, 1),
             };
         }
 
         private bool IsCardPoint(int x, int y)
         {
-            if (x >= 2 && x <= 6)
-                if (y >= 2 && y <= 6)
+            if (x >= 1 && x <= 5)
+                if (y >= 1 && y <= 5)
                     return true;
 
             return false;
