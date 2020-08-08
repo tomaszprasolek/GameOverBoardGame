@@ -47,7 +47,7 @@ namespace GameOverBoardGame.Model
                     }
                     if (IsCardPoint(i, j))
                     {
-                        Board[i, j] = new GamePiece(PieceStyle.HiddenCard, ShuffledCards[cardIdx]);
+                        Board[i, j] = new GamePiece(PieceStyle.Hidden, ShuffledCards[cardIdx]);
                         cardIdx++;
                         continue;
                     }
@@ -171,7 +171,7 @@ namespace GameOverBoardGame.Model
     {
         Empty,
         Player,
-        HiddenCard,
+        Hidden,
         ShowedCard
     }
 }

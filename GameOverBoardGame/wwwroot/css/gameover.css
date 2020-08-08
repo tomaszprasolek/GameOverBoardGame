@@ -1,0 +1,18 @@
+﻿.board {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    max-width: 490px;
+}
+
+.column {
+    min-width: 60px;
+    min-height: 60px;
+    height: 100%;
+}
+
+.gamepiece {
+    border: solid 1px black;
+    min-height: 60px;
+    min-width: 60px;
+}
