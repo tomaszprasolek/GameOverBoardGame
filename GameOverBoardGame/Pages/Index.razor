@@ -36,7 +36,7 @@
         {
             int x = i;
             int y = j;
-            <div class="gamepiece" @onclick="@(() => OnClick(x, y))">
+            <div class="gamepiece @game.GameBoard.Board[i, j].ToString().ToLower()" @onclick="@(() => OnClick(x, y))">
                 @game.GameBoard.Board[i, j].ToString()
             </div>
         }

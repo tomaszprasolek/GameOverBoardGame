@@ -20,3 +20,8 @@
 .activePlayer {
     background-color: lightgreen;
 }
+
+.enemyaxe {
+    background-image: url("../images/EnemyAxe.png");
+    background-repeat: no-repeat;
+}

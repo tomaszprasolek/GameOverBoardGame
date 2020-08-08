@@ -27,7 +27,7 @@
         {
             var result = Type.ToString();
             if (Enemy != null)
-                result += $" {Enemy.Weapon}";
+                result += Enemy.Weapon;
             if (ChestOwner != null)
                 result += $" {ChestOwner.Value}";
             return result;
