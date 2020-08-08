@@ -16,6 +16,8 @@ namespace GameOverBoardGame.Model
         private bool isGameOver = false;
         private bool isPlayerWin = false;
 
+        private NextAction? previousAction;
+
         public GameManager(int numberOfPlayers)
         {
             this.numberOfPlayers = numberOfPlayers;
@@ -60,9 +62,14 @@ namespace GameOverBoardGame.Model
             if (isGameOver)
                 return NextAction.GameOver;
 
-            GamePiece piece = GameBoard.PieceClicked(x, y, PlayerIndexCurrentTurn);
+            bool isTeleporting = previousAction != null && previousAction == NextAction.Teleport;
+
+            GamePiece piece = GameBoard.PieceClicked(x, y, PlayerIndexCurrentTurn, isTeleporting);
             if (piece == null)
+            {
+                previousAction = NextAction.Move;
                 return NextAction.Move;
+            }
 
             CurrentPlayer.ChoosenWeapon = selectedWeapon;
             NextAction res = CurrentPlayer.DoAction(piece.Card);
@@ -83,6 +90,7 @@ namespace GameOverBoardGame.Model
                     break;
             }
 
+            previousAction = res;
             return res;
         }
     }

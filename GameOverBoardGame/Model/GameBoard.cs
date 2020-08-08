@@ -151,7 +151,7 @@ namespace GameOverBoardGame.Model
             ShuffledCards = cards.OrderBy(x => Guid.NewGuid()).ToList();
         }
 
-        public GamePiece PieceClicked(int x, int y , int playerIdx)
+        public GamePiece PieceClicked(int x, int y , int playerIdx, bool isTeleporting = false)
         {
             Console.WriteLine("PieceClicked method start");
 
@@ -179,9 +179,12 @@ namespace GameOverBoardGame.Model
 
             Console.WriteLine($"previousPoint: {previousPoint}");
 
-            if (CheckIfPlayerClickCorrectCard(previousPoint.Value.X, previousPoint.Value.Y,
-                x, y, playerIdx) == false)
-                return null;
+            if (isTeleporting == false)
+            {
+                if (CheckIfPlayerClickCorrectCard(previousPoint.Value.X, previousPoint.Value.Y,
+                    x, y) == false)
+                    return null;
+            }
 
             AlreadyClickedPoints.Add(new Point(x, y));
             previousPoint = new Point(x, y);
@@ -195,24 +198,8 @@ namespace GameOverBoardGame.Model
             return piece;
         }
 
-        private bool CheckIfPlayerClickCorrectCard(int previousX, int previousY, int x, int y, int playerIdx)
+        private bool CheckIfPlayerClickCorrectCard(int previousX, int previousY, int x, int y)
         {
-            //if (numberOfPlayers == 2)
-            //{
-            //    if (playerIdx == 1)
-            //    {
-            //        if (previousX == 0 && previousY == 1)
-            //        {
-            //            if (x == 1 && y == 1)
-            //                return true;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        throw new NotImplementedException();
-            //    }
-            //}
-
             int res = x - previousX + (y - previousY);
             if (res == 1 || res == -1)
                 return true;
