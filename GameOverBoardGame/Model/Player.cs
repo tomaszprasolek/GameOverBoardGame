@@ -46,5 +46,10 @@ namespace GameOverBoardGame.Model
             }
             return NextAction.Move;
         }
+
+        public override string ToString()
+        {
+            return $"{Type}, weapon: {ChoosenWeapon}";
+        }
     }
 }

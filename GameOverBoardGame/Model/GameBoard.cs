@@ -154,6 +154,17 @@ namespace GameOverBoardGame.Model
             Style = style;
             Card = card;
         }
+
+        public override string ToString()
+        {
+            var result = Style.ToString();
+            if (Player != null)
+                result += Player.ToString();
+            if (Card != null)
+                result += Card.ToString();
+
+            return result;
+        }
     }
 
     public enum PieceStyle
