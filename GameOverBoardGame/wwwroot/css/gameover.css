@@ -6,15 +6,15 @@
 }
 
 .column {
-    min-width: 60px;
-    min-height: 60px;
+    min-width: 124px;
+    min-height: 122px;
     height: 100%;
 }
 
 .gamepiece {
     border: solid 1px black;
-    min-height: 60px;
-    min-width: 60px;
+    min-width: 124px;
+    min-height: 122px;
 }
 
 .activePlayer {
