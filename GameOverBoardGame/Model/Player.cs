@@ -49,7 +49,7 @@ namespace GameOverBoardGame.Model
 
         public override string ToString()
         {
-            return $"{Type}, weapon: {ChoosenWeapon}";
+            return Type.ToString();
         }
     }
 }

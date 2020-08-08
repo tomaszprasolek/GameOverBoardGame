@@ -2,7 +2,8 @@
     background-color: white;
     display: flex;
     flex-direction: row;
-    max-width: 490px;
+    max-width: 880px;
+    float: left;
 }
 
 .column {
@@ -21,7 +22,78 @@
     background-color: lightgreen;
 }
 
+
+.chestfat {
+    background-image: url("../images/ChestFat.png");
+    background-repeat: no-repeat;
+}
+
+.chestgirl {
+    background-image: url("../images/ChestGirl.png");
+    background-repeat: no-repeat;
+}
+
+.chesthandsome {
+    background-image: url("../images/ChestHandsome.png");
+    background-repeat: no-repeat;
+}
+
+.chestscared {
+    background-image: url("../images/ChestScared.png");
+    background-repeat: no-repeat;
+}
+
+.door {
+    background-image: url("../images/Door.png");
+    background-repeat: no-repeat;
+}
+
+.dragon {
+    background-image: url("../images/Dragon.png");
+    background-repeat: no-repeat;
+}
+
 .enemyaxe {
     background-image: url("../images/EnemyAxe.png");
+    background-repeat: no-repeat;
+}
+
+.enemybomb {
+    background-image: url("../images/EnemyBomb.png");
+    background-repeat: no-repeat;
+}
+
+.enemybow {
+    background-image: url("../images/EnemyBow.png");
+    background-repeat: no-repeat;
+}
+
+.enemygun {
+    background-image: url("../images/EnemyGun.png");
+    background-repeat: no-repeat;
+}
+
+.key {
+    background-image: url("../images/Key.png");
+    background-repeat: no-repeat;
+}
+
+.playerfat {
+    background-image: url("../images/PlayerFat.png");
+    background-repeat: no-repeat;
+}
+
+.playergirl {
+    background-image: url("../images/PlayerGirl.png");
+    background-repeat: no-repeat;
+}
+
+.playerhandsome {
+    background-image: url("../images/PlayerHandsome.png");
+    background-repeat: no-repeat;
+}
+
+.playerscared {
+    background-image: url("../images/PlayerScared.png");
     background-repeat: no-repeat;
 }

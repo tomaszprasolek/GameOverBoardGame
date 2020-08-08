@@ -29,7 +29,7 @@
             if (Enemy != null)
                 result += Enemy.Weapon;
             if (ChestOwner != null)
-                result += $" {ChestOwner.Value}";
+                result += ChestOwner.Value;
             return result;
         }
     }

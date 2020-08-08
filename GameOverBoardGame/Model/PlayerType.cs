@@ -2,6 +2,6 @@
 {
     public enum PlayerType
     {
-        Girl, Handsom, Fat, Scared
+        Girl, Handsome, Fat, Scared
     }
 }

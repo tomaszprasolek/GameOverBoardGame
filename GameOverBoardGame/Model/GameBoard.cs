@@ -50,11 +50,28 @@ namespace GameOverBoardGame.Model
             DrawBoard();
         }
 
+        private Dictionary<int, Player> GetPlayers()
+        {
+            var players = new Dictionary<int, Player>(numberOfPlayers)
+            {
+                { 1, new Player(PlayerType.Girl) },
+                { 2, new Player(PlayerType.Handsome) }
+            };
+
+            if (numberOfPlayers >= 3)
+                players.Add(3, new Player(PlayerType.Fat));
+            if (numberOfPlayers >= 4)
+                players.Add(4, new Player(PlayerType.Scared));
+
+            return players;
+        }
+
         private void DrawBoard()
         {
             Board = new GamePiece[7, 7];
 
             int cardIdx = 0;
+            int playerIdx = 1;
 
             for (int i = 0; i < 7; i++)
             {
@@ -62,7 +79,8 @@ namespace GameOverBoardGame.Model
                 {
                     if (IsPlayerPoint(i, j))
                     {
-                        Board[i, j] = new GamePiece(PieceStyle.Player);
+                        Board[i, j] = new GamePiece(PieceStyle.Player, GetPlayers()[playerIdx]);
+                        playerIdx++;
                         continue;
                     }
                     if (IsCardPoint(i, j))
@@ -144,7 +162,7 @@ namespace GameOverBoardGame.Model
             // 4 chests
             cards.Add(new Card(CardType.Chest, PlayerType.Fat));
             cards.Add(new Card(CardType.Chest, PlayerType.Girl));
-            cards.Add(new Card(CardType.Chest, PlayerType.Handsom));
+            cards.Add(new Card(CardType.Chest, PlayerType.Handsome));
             cards.Add(new Card(CardType.Chest, PlayerType.Scared));
 
             // https://improveandrepeat.com/2018/08/a-simple-way-to-shuffle-your-lists-in-c/

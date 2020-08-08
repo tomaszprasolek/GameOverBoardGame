@@ -4,7 +4,7 @@
 <h1>GameOver board game</h1>
 
 @code {
-    GameManager game = new GameManager(2);
+    GameManager game = new GameManager(4);
 }
 
 <div class="board">
@@ -16,14 +16,13 @@
                 int x = i;
                 int y = j;
                 <div class="gamepiece @game.GameBoard.Board[i, j].ToString().ToLower()" @onclick="@(() => OnClick(x, y))">
-                    @game.GameBoard.Board[i, j].ToString()
                 </div>
             }
         </div>
     }
 </div>
 
-<div>
+<div style="display: block">
     <button @onclick="(() => game.Reset())">RESET</button>
     <br />
 

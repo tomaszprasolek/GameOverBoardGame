@@ -37,7 +37,7 @@ namespace GameOverBoardGame.Model
         {
             Players = new Dictionary<int, Player>(numberOfPlayers);
             Players.Add(1, new Player(PlayerType.Girl));
-            Players.Add(2, new Player(PlayerType.Handsom));
+            Players.Add(2, new Player(PlayerType.Handsome));
             if (numberOfPlayers >= 3)
                 Players.Add(3, new Player(PlayerType.Fat));
             if (numberOfPlayers >= 4)
