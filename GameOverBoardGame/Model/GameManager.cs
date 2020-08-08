@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace GameOverBoardGame.Model
 {
@@ -63,12 +64,21 @@ namespace GameOverBoardGame.Model
                 return NextAction.GameOver;
 
             bool isTeleporting = previousAction != null && previousAction == NextAction.Teleport;
+            bool isDragonSwitch = previousAction == NextAction.GameOverAndReplaceDragonCard;
 
-            GamePiece piece = GameBoard.PieceClicked(x, y, PlayerIndexCurrentTurn, isTeleporting);
+            GamePiece piece = GameBoard.PieceClicked(x, y, PlayerIndexCurrentTurn, isTeleporting, isDragonSwitch);
             if (piece == null)
             {
                 previousAction = NextAction.Move;
                 return NextAction.Move;
+            }
+
+            if (isDragonSwitch)
+            {
+                GameBoard.SwitchDragonCard(new System.Drawing.Point(x, y));
+                previousAction = NextAction.GameOver;
+                isGameOver = true;
+                return NextAction.GameOver;
             }
 
             CurrentPlayer.ChoosenWeapon = selectedWeapon;
@@ -76,17 +86,12 @@ namespace GameOverBoardGame.Model
 
             switch (res)
             {
-                case NextAction.Move:
-                    break;
+
                 case NextAction.GameOver:
                     isGameOver = true;
                     break;
                 case NextAction.GameWin:
                     isPlayerWin = true;
-                    break;
-                case NextAction.Teleport:
-                    break;
-                case NextAction.GameOverAndReplaceDragonCard:
                     break;
             }
 

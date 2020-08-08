@@ -151,7 +151,7 @@ namespace GameOverBoardGame.Model
             ShuffledCards = cards.OrderBy(x => Guid.NewGuid()).ToList();
         }
 
-        public GamePiece PieceClicked(int x, int y , int playerIdx, bool isTeleporting = false)
+        public GamePiece PieceClicked(int x, int y, int playerIdx, bool isTeleporting = false, bool isDragonSwitch = false)
         {
             Console.WriteLine("PieceClicked method start");
 
@@ -179,19 +179,37 @@ namespace GameOverBoardGame.Model
 
             Console.WriteLine($"previousPoint: {previousPoint}");
 
-            if (isTeleporting == false)
+            if (isTeleporting == false && isDragonSwitch == false)
             {
                 if (CheckIfPlayerClickCorrectCard(previousPoint.Value.X, previousPoint.Value.Y,
                     x, y) == false)
                     return null;
             }
 
-            AlreadyClickedPoints.Add(new Point(x, y));
-            previousPoint = new Point(x, y);
+            if (isDragonSwitch)
+            {
+                // Cannot place dragon on first spot, next to player. Starting points.
+                if (x == 1 && y == 1)
+                    return null;
+                if (x == 1 && y == 5)
+                    return null;
+                if (x == 5 && y == 1)
+                    return null;
+                if (x == 5 && y == 5)
+                    return null;
+            }
+            else
+            {
+                AlreadyClickedPoints.Add(new Point(x, y));
+                previousPoint = new Point(x, y);
+            }
 
             Console.WriteLine("Correct game piece clicked");
 
             GamePiece piece = Board[x, y];
+            if (isDragonSwitch)
+                return piece;
+
             if (piece.Style == PieceStyle.Hidden)
                 piece.Style = PieceStyle.ShowedCard;
 
@@ -205,6 +223,17 @@ namespace GameOverBoardGame.Model
                 return true;
             else
                 return false;
+        }
+
+        public void SwitchDragonCard(Point newPoint)
+        {
+            Console.WriteLine($"Prev point: {previousPoint.Value.X}, {previousPoint.Value.Y}");
+
+            Board[previousPoint.Value.X, previousPoint.Value.Y] = Board[newPoint.X, newPoint.Y];
+            Board[newPoint.X, newPoint.Y] = new GamePiece(PieceStyle.ShowedCard, new Card(CardType.Dragon));
+
+            Console.WriteLine($"Old dragon place: [{previousPoint.Value.X},{previousPoint.Value.Y}] {Board[previousPoint.Value.X, previousPoint.Value.Y]}");
+            Console.WriteLine($"Dragon new place: [{newPoint.X},{newPoint.Y}] {Board[newPoint.X, newPoint.Y]}");
         }
     }
 
