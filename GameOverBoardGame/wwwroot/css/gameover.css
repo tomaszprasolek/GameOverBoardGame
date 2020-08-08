@@ -16,3 +16,7 @@
     min-height: 60px;
     min-width: 60px;
 }
+
+.activePlayer {
+    background-color: lightgreen;
+}

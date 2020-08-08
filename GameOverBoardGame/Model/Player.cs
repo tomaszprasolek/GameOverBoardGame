@@ -8,7 +8,7 @@ namespace GameOverBoardGame.Model
         public PlayerType Type { get; }
         public Weapon ChoosenWeapon { get; set; }
 
-        public List<Card> VisitedCards { get; private set; }
+        public List<Card> VisitedCards { get; private set; } = new List<Card>(8);
 
         public Player(PlayerType type)
         {

@@ -4,8 +4,29 @@
 <h1>GameOver board game</h1>
 
 @code {
-    GameBoard gameBoard = new GameBoard(2);
+    GameManager game = new GameManager(2);
 }
+
+<div>
+    <button @onclick="(() => game.Reset())">RESET</button>
+    <br />
+
+    Wybierz broń:
+    @foreach (var item in Enum.GetNames(typeof(Weapon)))
+    {
+        <label><input type="radio" name="weapon" value="@item" @onclick="(() => RadioButtonClicked(item))"> @item</label>
+    }
+
+    <br />
+    <hr />
+
+    <p>Wybrana broń: <b>@selectedWeapon</b></p>
+    <p>Co się dzieje: <b>@nextAction</b></p>
+    <div>
+        Aktualny gracz: @game.PlayerIndexCurrentTurn
+        <button @onclick="(() => NextPlayer())">Następny gracz</button>
+    </div>
+</div>
 
 <div class="board">
     @for (int i = 0; i < 7; i++)
@@ -13,8 +34,34 @@
     <div class="column">
         @for (int j = 0; j < 7; j++)
         {
-            <div class="gamepiece">@gameBoard.Board[i, j].ToString()</div>
+            int x = i;
+            int y = j;
+            <div class="gamepiece" @onclick="@(() => OnClick(x, y))">
+                @game.GameBoard.Board[i, j].ToString()
+            </div>
         }
     </div>
     }
 </div>
+
+@code {
+    Weapon selectedWeapon;
+    NextAction nextAction = NextAction.Move;
+    int currentPlayer = 1;
+
+    private void RadioButtonClicked(string weapon)
+    {
+        selectedWeapon = (Weapon)Enum.Parse(typeof(Weapon), weapon);
+    }
+
+    private void OnClick(int x, int y)
+    {
+        nextAction = game.PieceClicked(x, y, selectedWeapon);
+    }
+
+    private void NextPlayer()
+    {
+        nextAction = NextAction.Move;
+        game.NextPlayer();
+    }
+}

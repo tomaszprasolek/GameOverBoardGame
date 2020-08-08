@@ -13,6 +13,10 @@ namespace GameOverBoardGame.Model
 
         public GamePiece[,] Board { get; set; }
 
+        private Point? previousPoint;
+
+        private List<Point> AlreadyClickedPoints = new List<Point>(8);
+
         public GameBoard(int numberOfPlayers)
         {
             if (numberOfPlayers <= 1)
@@ -22,6 +26,22 @@ namespace GameOverBoardGame.Model
 
             this.numberOfPlayers = numberOfPlayers;
             Reset();
+        }
+
+
+        public void HideAllCards()
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    if (Board[i, j].Style == PieceStyle.ShowedCard)
+                        Board[i, j].Style = PieceStyle.Hidden;
+                }
+            }
+
+            AlreadyClickedPoints = new List<Point>(8);
+            previousPoint = null;
         }
 
         private void Reset()
@@ -130,11 +150,80 @@ namespace GameOverBoardGame.Model
             // https://improveandrepeat.com/2018/08/a-simple-way-to-shuffle-your-lists-in-c/
             ShuffledCards = cards.OrderBy(x => Guid.NewGuid()).ToList();
         }
+
+        public GamePiece PieceClicked(int x, int y , int playerIdx)
+        {
+            Console.WriteLine("PieceClicked method start");
+
+            if (x < 1 || x > 5)
+            {
+                Console.WriteLine("X is to low or to high");
+                return null;
+            }
+            if (y < 1 || y > 5)
+            {
+                Console.WriteLine("Y is to low or to high");
+                return null;
+            }
+
+            Console.WriteLine($"AlreadyClickedPoints: {AlreadyClickedPoints.Count}");
+
+            if (AlreadyClickedPoints.Count > 0)
+            {
+                if (AlreadyClickedPoints.Count(a => a == new Point(x, y)) == 1)
+                    return null;
+            }
+
+            if (previousPoint == null)
+                previousPoint = GetPlayersPointOnBoard()[playerIdx - 1];
+
+            Console.WriteLine($"previousPoint: {previousPoint}");
+
+            if (CheckIfPlayerClickCorrectCard(previousPoint.Value.X, previousPoint.Value.Y,
+                x, y, playerIdx) == false)
+                return null;
+
+            AlreadyClickedPoints.Add(new Point(x, y));
+            previousPoint = new Point(x, y);
+
+            Console.WriteLine("Correct game piece clicked");
+
+            GamePiece piece = Board[x, y];
+            if (piece.Style == PieceStyle.Hidden)
+                piece.Style = PieceStyle.ShowedCard;
+
+            return piece;
+        }
+
+        private bool CheckIfPlayerClickCorrectCard(int previousX, int previousY, int x, int y, int playerIdx)
+        {
+            //if (numberOfPlayers == 2)
+            //{
+            //    if (playerIdx == 1)
+            //    {
+            //        if (previousX == 0 && previousY == 1)
+            //        {
+            //            if (x == 1 && y == 1)
+            //                return true;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        throw new NotImplementedException();
+            //    }
+            //}
+
+            int res = x - previousX + (y - previousY);
+            if (res == 1 || res == -1)
+                return true;
+            else
+                return false;
+        }
     }
 
     public class GamePiece
     {
-        public PieceStyle Style { get; }
+        public PieceStyle Style { get; set; }
         public Player Player { get; }
         public Card Card { get; }
 
@@ -157,7 +246,12 @@ namespace GameOverBoardGame.Model
 
         public override string ToString()
         {
-            var result = Style.ToString();
+            if (Style == PieceStyle.Hidden)
+                return Style.ToString();
+
+            string result = string.Empty;
+            if (Style != PieceStyle.ShowedCard)
+                result = Style.ToString();
             if (Player != null)
                 result += Player.ToString();
             if (Card != null)
