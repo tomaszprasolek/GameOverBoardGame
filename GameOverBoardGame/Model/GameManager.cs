@@ -33,15 +33,12 @@ namespace GameOverBoardGame.Model
         private void SetPlayers()
         {
             Players = new Dictionary<int, Player>(numberOfPlayers);
-
-            if (numberOfPlayers == 2)
-            {
-                Players.Add(1, new Player(PlayerType.Girl));
-                Players.Add(2, new Player(PlayerType.Handsom));
-                return;
-            }
-
-            throw new NotImplementedException();
+            Players.Add(1, new Player(PlayerType.Girl));
+            Players.Add(2, new Player(PlayerType.Handsom));
+            if (numberOfPlayers >= 3)
+                Players.Add(3, new Player(PlayerType.Fat));
+            if (numberOfPlayers >= 4)
+                Players.Add(4, new Player(PlayerType.Scared));
         }
 
         public void NextPlayer()
@@ -76,7 +73,6 @@ namespace GameOverBoardGame.Model
                     break;
                 case NextAction.GameOver:
                     isGameOver = true;
-                    //GameBoard.HideAllCards();
                     break;
                 case NextAction.GameWin:
                     isPlayerWin = true;
