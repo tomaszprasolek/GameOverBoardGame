@@ -18,8 +18,9 @@
     min-height: 122px;
 }
 
-.activePlayer {
-    background-color: lightgreen;
+.infoPanel {
+    float: left;
+    padding-left: 10px;
 }
 
 .chestfat {

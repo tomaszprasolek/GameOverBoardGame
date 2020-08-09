@@ -5,7 +5,7 @@
 <h1>GameOver board game</h1>
 
 @code {
-    GameManager game = new GameManager(4);
+    GameManager game = new GameManager(2);
 }
 
 <div class="board">
@@ -23,7 +23,7 @@
     }
 </div>
 
-<div style="display: block">
+<div class="infoPanel">
     <button @onclick="(() => game.Reset())">RESET</button>
     <br />
 
@@ -37,11 +37,17 @@
     <hr />
 
     <p>Wybrana broń: <b>@selectedWeapon</b></p>
-    <p>Co się dzieje: <b>@nextAction</b></p>
+    <p>Aktualny gracz: <b>@game.CurrentPlayer.ToString()</b></p>
+    <div class="alert alert-@nextAction.AlertType" role="alert">
+        @nextAction.Information
+    </div>
     <div>
-        Aktualny gracz: @game.PlayerIndexCurrentTurn
-        @if (nextAction == NextAction.GameOver)
+        
+        @if (nextAction.NextAction == NextAction.GameOver)
         {
+            <div class="alert alert-info" role="alert">
+                Naciśnij przycisk 'Następny gracz'
+            </div>
             <button @onclick="(() => NextPlayer())">Następny gracz</button>
         }
         else
@@ -53,8 +59,7 @@
 
 @code {
     Weapon selectedWeapon;
-    NextAction nextAction = NextAction.Move;
-    int currentPlayer = 1;
+    NextActionInfo nextAction = new NextActionInfo(NextAction.Move);
 
     private void RadioButtonClicked(string weapon)
     {
@@ -68,7 +73,7 @@
 
     private void NextPlayer()
     {
-        nextAction = NextAction.Move;
+        nextAction = new NextActionInfo(NextAction.Move);
         game.NextPlayer();
     }
 }

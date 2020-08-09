@@ -13,10 +13,9 @@ namespace GameOverBoardGame.Model
         private Dictionary<int, Player> Players;
         public int PlayerIndexCurrentTurn { get; private set; } = 1;
 
-        private Player CurrentPlayer => Players[PlayerIndexCurrentTurn];
+        public Player CurrentPlayer => Players[PlayerIndexCurrentTurn];
 
         private bool isGameOver = false;
-        private bool isPlayerWin = false;
 
         private NextAction? previousAction;
 
@@ -29,7 +28,6 @@ namespace GameOverBoardGame.Model
         public void Reset()
         {
             isGameOver = false;
-            isPlayerWin = false;
             GameBoard = new GameBoard(numberOfPlayers);
             SetPlayers();
         }
@@ -49,6 +47,7 @@ namespace GameOverBoardGame.Model
         {
             isGameOver = false;
             GameBoard.HideAllCards();
+            SetPlayers();
 
             int currentPlayeridx = PlayerIndexCurrentTurn;
             int nextPlayerIdx = currentPlayeridx + 1;
@@ -59,10 +58,12 @@ namespace GameOverBoardGame.Model
             PlayerIndexCurrentTurn = nextPlayerIdx;
         }
 
-        public NextAction PieceClicked(int x, int y, Weapon selectedWeapon)
+        public NextActionInfo PieceClicked(int x, int y, Weapon selectedWeapon)
         {
+            if (previousAction == NextAction.GameWin)
+                return new NextActionInfo(NextAction.GameWin);
             if (isGameOver)
-                return NextAction.GameOver;
+                return new NextActionInfo(NextAction.GameOver);
 
             bool isTeleporting = previousAction != null && previousAction == NextAction.Teleport;
             bool isDragonSwitch = previousAction == NextAction.GameOverAndReplaceDragonCard;
@@ -71,7 +72,7 @@ namespace GameOverBoardGame.Model
             if (piece == null)
             {
                 previousAction = NextAction.Move;
-                return NextAction.Move;
+                return new NextActionInfo(NextAction.Move);
             }
 
             if (isDragonSwitch)
@@ -79,7 +80,7 @@ namespace GameOverBoardGame.Model
                 GameBoard.SwitchDragonCard(new System.Drawing.Point(x, y));
                 previousAction = NextAction.GameOver;
                 isGameOver = true;
-                return NextAction.GameOver;
+                return new NextActionInfo(NextAction.GameOver);
             }
 
             CurrentPlayer.ChoosenWeapon = selectedWeapon;
@@ -87,17 +88,13 @@ namespace GameOverBoardGame.Model
 
             switch (res)
             {
-
                 case NextAction.GameOver:
                     isGameOver = true;
-                    break;
-                case NextAction.GameWin:
-                    isPlayerWin = true;
                     break;
             }
 
             previousAction = res;
-            return res;
+            return new NextActionInfo(res);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace GameOverBoardGame.Model
     {
         private readonly int numberOfPlayers;
 
-        public List<Card> ShuffledCards { get; private set; }
+        private List<Card> ShuffledCards { get; set; }
 
         public GamePiece[,] Board { get; set; }
 
