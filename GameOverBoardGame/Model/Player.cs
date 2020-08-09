@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GameOverBoardGame.Enums;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GameOverBoardGame.Model

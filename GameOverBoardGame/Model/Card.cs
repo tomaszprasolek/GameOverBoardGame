@@ -1,4 +1,6 @@
-﻿namespace GameOverBoardGame.Model
+﻿using GameOverBoardGame.Enums;
+
+namespace GameOverBoardGame.Model
 {
     public class Card
     {

@@ -1,4 +1,4 @@
-﻿namespace GameOverBoardGame.Model
+﻿namespace GameOverBoardGame.Enums
 {
     public enum PlayerType
     {
