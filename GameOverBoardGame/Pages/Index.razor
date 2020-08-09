@@ -40,11 +40,16 @@
     <p>Co się dzieje: <b>@nextAction</b></p>
     <div>
         Aktualny gracz: @game.PlayerIndexCurrentTurn
-        <button @onclick="(() => NextPlayer())">Następny gracz</button>
+        @if (nextAction == NextAction.GameOver)
+        {
+            <button @onclick="(() => NextPlayer())">Następny gracz</button>
+        }
+        else
+        {
+            <button @onclick="(() => NextPlayer())" disabled>Następny gracz</button>
+        }
     </div>
 </div>
-
-
 
 @code {
     Weapon selectedWeapon;
