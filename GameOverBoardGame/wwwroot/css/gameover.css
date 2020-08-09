@@ -97,3 +97,8 @@
     background-image: url("../images/PlayerScared.png");
     background-repeat: no-repeat;
 }
+
+.hidden {
+    background-image: url("../images/Hidden.png");
+    background-repeat: no-repeat;
+}
