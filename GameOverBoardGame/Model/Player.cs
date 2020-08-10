@@ -24,7 +24,7 @@ namespace GameOverBoardGame.Model
 
             if (card.Type == CardType.Enemy)
             {
-                bool fightResult = card.Enemy.Weapon == ChoosenWeapon;
+                bool fightResult = card.Weapon == ChoosenWeapon;
                 if (fightResult == false)
                     return NextAction.GameOver;
                 else

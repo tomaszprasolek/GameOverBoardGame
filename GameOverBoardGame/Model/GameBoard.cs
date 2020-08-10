@@ -142,16 +142,16 @@ namespace GameOverBoardGame.Model
 
             // 4 enemies with axe
             for (int i = 0; i < 4; i++)
-                cards.Add(Card.CreateEnemyCard(new Enemy(Weapon.Axe)));
+                cards.Add(Card.CreateEnemyCard(Weapon.Axe));
             // 4 enemies with bow
             for (int i = 0; i < 4; i++)
-                cards.Add(Card.CreateEnemyCard(new Enemy(Weapon.Bow)));
+                cards.Add(Card.CreateEnemyCard(Weapon.Bow));
             // 4 enemies with gun
             for (int i = 0; i < 4; i++)
-                cards.Add(Card.CreateEnemyCard(new Enemy(Weapon.Gun)));
+                cards.Add(Card.CreateEnemyCard(Weapon.Gun));
             // 4 enemies with bomb
             for (int i = 0; i < 4; i++)
-                cards.Add(Card.CreateEnemyCard(new Enemy(Weapon.Bomb)));
+                cards.Add(Card.CreateEnemyCard(Weapon.Bomb));
 
             // 2 keys
             cards.Add(Card.CreateCard(CardType.Key));

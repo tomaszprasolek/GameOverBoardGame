@@ -6,17 +6,17 @@ namespace GameOverBoardGame.Model
     {
         public CardType Type { get; }
         public PlayerType? ChestOwner { get; }
-        public Enemy Enemy { get; }
+        public Weapon? Weapon { get; }
 
         private Card(CardType type)
         {
             Type = type;
         }
 
-        private Card(CardType type, Enemy enemy)
+        private Card(CardType type, Weapon weapon)
         {
             Type = type;
-            Enemy = enemy;
+            Weapon = weapon;
         }
 
         private Card(CardType type, PlayerType chestOwner)
@@ -35,16 +35,16 @@ namespace GameOverBoardGame.Model
             return new Card(CardType.Chest, owner);
         }
 
-        public static Card CreateEnemyCard(Enemy enemy)
+        public static Card CreateEnemyCard(Weapon Weapon)
         {
-            return new Card(CardType.Enemy, enemy);
+            return new Card(CardType.Enemy, Weapon);
         }
 
         public override string ToString()
         {
             var result = Type.ToString();
-            if (Enemy != null)
-                result += Enemy.Weapon;
+            if (Weapon != null)
+                result += Weapon;
             if (ChestOwner != null)
                 result += ChestOwner.Value;
             return result;
