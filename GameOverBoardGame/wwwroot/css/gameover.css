@@ -13,7 +13,6 @@
 }
 
 .gamepiece {
-    border: solid 1px black;
     min-width: 124px;
     min-height: 122px;
 }
