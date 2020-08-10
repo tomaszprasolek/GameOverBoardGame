@@ -154,13 +154,13 @@ namespace GameOverBoardGame.Model
                 cards.Add(Card.CreateEnemyCard(new Enemy(Weapon.Bomb)));
 
             // 2 keys
-            cards.Add(new Card(CardType.Key));
-            cards.Add(new Card(CardType.Key));
+            cards.Add(Card.CreateCard(CardType.Key));
+            cards.Add(Card.CreateCard(CardType.Key));
             // 2 dragons
-            cards.Add(new Card(CardType.Dragon));
-            cards.Add(new Card(CardType.Dragon));
+            cards.Add(Card.CreateCard(CardType.Dragon));
+            cards.Add(Card.CreateCard(CardType.Dragon));
             // 1 door
-            cards.Add(new Card(CardType.Door));
+            cards.Add(Card.CreateCard(CardType.Door));
             // 4 chests
             cards.Add(Card.CreateChestCard(PlayerType.Fat));
             cards.Add(Card.CreateChestCard(PlayerType.Girl));
@@ -250,7 +250,7 @@ namespace GameOverBoardGame.Model
             Console.WriteLine($"Prev point: {previousPoint.Value.X}, {previousPoint.Value.Y}");
 
             Board[previousPoint.Value.X, previousPoint.Value.Y] = Board[newPoint.X, newPoint.Y];
-            Board[newPoint.X, newPoint.Y] = new GamePiece(PieceStyle.ShowedCard, new Card(CardType.Dragon));
+            Board[newPoint.X, newPoint.Y] = new GamePiece(PieceStyle.ShowedCard, Card.CreateCard(CardType.Dragon));
 
             Console.WriteLine($"Old dragon place: [{previousPoint.Value.X},{previousPoint.Value.Y}] {Board[previousPoint.Value.X, previousPoint.Value.Y]}");
             Console.WriteLine($"Dragon new place: [{newPoint.X},{newPoint.Y}] {Board[newPoint.X, newPoint.Y]}");

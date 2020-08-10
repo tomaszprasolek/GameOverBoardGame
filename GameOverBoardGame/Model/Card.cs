@@ -8,7 +8,7 @@ namespace GameOverBoardGame.Model
         public PlayerType? ChestOwner { get; }
         public Enemy Enemy { get; }
 
-        public Card(CardType type)
+        private Card(CardType type)
         {
             Type = type;
         }
@@ -23,6 +23,11 @@ namespace GameOverBoardGame.Model
         {
             Type = type;
             ChestOwner = chestOwner;
+        }
+
+        public static Card CreateCard(CardType type)
+        {
+            return new Card(type);
         }
 
         public static Card CreateChestCard(PlayerType owner)
