@@ -13,7 +13,7 @@ namespace GameOverBoardGame.Model
             Type = type;
         }
 
-        public Card(CardType type, Enemy enemy)
+        private Card(CardType type, Enemy enemy)
         {
             Type = type;
             Enemy = enemy;
@@ -28,6 +28,11 @@ namespace GameOverBoardGame.Model
         public static Card CreateChestCard(PlayerType owner)
         {
             return new Card(CardType.Chest, owner);
+        }
+
+        public static Card CreateEnemyCard(Enemy enemy)
+        {
+            return new Card(CardType.Enemy, enemy);
         }
 
         public override string ToString()
