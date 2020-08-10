@@ -161,10 +161,10 @@ namespace GameOverBoardGame.Model
             // 1 door
             cards.Add(new Card(CardType.Door));
             // 4 chests
-            cards.Add(new Card(CardType.Chest, PlayerType.Fat));
-            cards.Add(new Card(CardType.Chest, PlayerType.Girl));
-            cards.Add(new Card(CardType.Chest, PlayerType.Handsome));
-            cards.Add(new Card(CardType.Chest, PlayerType.Scared));
+            cards.Add(Card.CreateChestCard(PlayerType.Fat));
+            cards.Add(Card.CreateChestCard(PlayerType.Girl));
+            cards.Add(Card.CreateChestCard(PlayerType.Handsome));
+            cards.Add(Card.CreateChestCard(PlayerType.Scared));
 
             // https://improveandrepeat.com/2018/08/a-simple-way-to-shuffle-your-lists-in-c/
             ShuffledCards = cards.OrderBy(x => Guid.NewGuid()).ToList();

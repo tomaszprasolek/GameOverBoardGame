@@ -19,10 +19,15 @@ namespace GameOverBoardGame.Model
             Enemy = enemy;
         }
 
-        public Card(CardType type, PlayerType chestOwner)
+        private Card(CardType type, PlayerType chestOwner)
         {
             Type = type;
             ChestOwner = chestOwner;
+        }
+
+        public static Card CreateChestCard(PlayerType owner)
+        {
+            return new Card(CardType.Chest, owner);
         }
 
         public override string ToString()
