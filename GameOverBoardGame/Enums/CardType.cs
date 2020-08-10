@@ -2,6 +2,6 @@
 {
     public enum CardType
     {
-        Enemy, Dragon, Door, Chest, Key, Empty, Player
+        Enemy, Dragon, Door, Chest, Key
     }
 }
