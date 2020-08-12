@@ -1,7 +1,5 @@
 ﻿using GameOverBoardGame.Enums;
-using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
 namespace GameOverBoardGame.Model
 {
@@ -71,6 +69,10 @@ namespace GameOverBoardGame.Model
             GamePiece piece = GameBoard.PieceClicked(x, y, PlayerIndexCurrentTurn, isTeleporting, isDragonSwitch);
             if (piece == null)
             {
+                // Czyli wybrano pole w któe nie można smoka przenieść
+                if (isDragonSwitch) 
+                    return new NextActionInfo(NextAction.GameOverAndReplaceDragonCard);
+
                 previousAction = NextAction.Move;
                 return new NextActionInfo(NextAction.Move);
             }
