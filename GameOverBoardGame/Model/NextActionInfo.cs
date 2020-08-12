@@ -1,11 +1,12 @@
 ﻿using GameOverBoardGame.Enums;
+using Microsoft.AspNetCore.Components;
 
 namespace GameOverBoardGame.Model
 {
     public class NextActionInfo
     {
         public NextAction NextAction { get; }
-        public string Information { get; private set; }
+        public MarkupString Information { get; private set; }
         public string AlertType { get; private set; }           
 
         public NextActionInfo(NextAction nextAction)
@@ -22,24 +23,24 @@ namespace GameOverBoardGame.Model
             switch (NextAction)
             {
                 case NextAction.Move:
-                    info = "Rusz się. Wybierz kartę.";
+                    info = "Twój ruch. Wybierz kartę.";
                     break;
                 case NextAction.GameOver:
                     info = "Niestety przegrałeś. Game over";
                     break;
                 case NextAction.GameWin:
-                    info = "Brawo wygrałeś";
+                    info = "Brawo wygrałeś!!!";
                     break;
                 case NextAction.Teleport:
-                    info = "Znalazłeś drzwi. Możesz ruszyć się na dowolne zakryte pole.";
+                    info = "Znalazłeś drzwi.<br />Możesz ruszyć się na dowolne zakryte pole.";
                     break;
                 case NextAction.GameOverAndReplaceDragonCard:
                     info = "Niestety przegrałeś. Game over.<br />";
-                    info += "Smok ucieka.";
+                    info += "Smok ucieka.<br />";
                     info += "Wybierz zakryte pole, na które przeniesie się smok.";
                     break;
             }
-            Information = info;
+            Information = (MarkupString)info;
         }
 
         private void SetCurrentActionAlertType()
