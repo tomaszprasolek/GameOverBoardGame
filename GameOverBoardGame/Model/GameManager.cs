@@ -7,9 +7,8 @@ namespace GameOverBoardGame.Model
     {
         public GameBoard GameBoard { get; private set; }
 
-        private readonly int numberOfPlayers;
         private Dictionary<int, Player> Players;
-        public int PlayerIndexCurrentTurn { get; private set; } = 1;
+        private int PlayerIndexCurrentTurn = 1;
 
         public Player CurrentPlayer => Players[PlayerIndexCurrentTurn];
 
@@ -17,20 +16,19 @@ namespace GameOverBoardGame.Model
 
         private NextAction? previousAction;
 
-        public GameManager(int numberOfPlayers)
+        /// <summary>
+        /// Nowa gra
+        /// </summary>
+        /// <param name="numberOfPlayers"></param>
+        public void NewGame(int numberOfPlayers)
         {
-            this.numberOfPlayers = numberOfPlayers;
-            Reset();
-        }
-
-        public void Reset()
-        {
+            PlayerIndexCurrentTurn = 1;
             isGameOver = false;
             GameBoard = new GameBoard(numberOfPlayers);
-            SetPlayers();
+            SetPlayers(numberOfPlayers);
         }
 
-        private void SetPlayers()
+        private void SetPlayers(int numberOfPlayers)
         {
             Players = new Dictionary<int, Player>(numberOfPlayers);
             Players.Add(1, new Player(PlayerType.Girl));
@@ -45,7 +43,6 @@ namespace GameOverBoardGame.Model
         {
             isGameOver = false;
             GameBoard.HideAllCards();
-            SetPlayers();
 
             int currentPlayeridx = PlayerIndexCurrentTurn;
             int nextPlayerIdx = currentPlayeridx + 1;

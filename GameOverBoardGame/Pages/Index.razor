@@ -1,13 +1,8 @@
 ﻿@page "/"
 @using GameOverBoardGame.Model;
 @using GameOverBoardGame.Enums;
-@using Microsoft.AspNetCore.Components; 
 
 <h1>GameOver board game</h1>
-
-@code {
-    GameManager game = new GameManager(2);
-}
 
 <div class="board">
     @for (int i = 0; i < 7; i++)
@@ -25,7 +20,7 @@
 </div>
 
 <div class="infoPanel">
-    <button @onclick="(() => game.Reset())">RESET</button>
+    <button @onclick="(() => game.NewGame(2))">RESET</button>
     <br />
 
     Wybierz broń:
@@ -57,24 +52,3 @@
         }
     </div>
 </div>
-
-@code {
-    Weapon selectedWeapon;
-    NextActionInfo nextAction = new NextActionInfo(NextAction.Move);
-
-    private void RadioButtonClicked(string weapon)
-    {
-        selectedWeapon = (Weapon)Enum.Parse(typeof(Weapon), weapon);
-    }
-
-    private void OnClick(int x, int y)
-    {
-        nextAction = game.PieceClicked(x, y, selectedWeapon);
-    }
-
-    private void NextPlayer()
-    {
-        nextAction = new NextActionInfo(NextAction.Move);
-        game.NextPlayer();
-    }
-}
