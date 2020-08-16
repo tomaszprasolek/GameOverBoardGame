@@ -112,7 +112,7 @@ namespace GameOverBoardGame.Model
                 return new List<Point>
                 {
                     new Point(1, 0),
-                    new Point(0, 5),
+                    new Point(6, 1),
                     new Point(5, 6),
                 };
             }
@@ -120,9 +120,9 @@ namespace GameOverBoardGame.Model
             return new List<Point>
             {
                 new Point(1, 0),
-                new Point(0, 5),
-                new Point(5, 6),
                 new Point(6, 1),
+                new Point(5, 6),
+                new Point(0, 5),
             };
         }
 
