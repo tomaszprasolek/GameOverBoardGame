@@ -9,11 +9,12 @@ namespace GameOverBoardGame.Pages
         private GameManager game;
         private Weapon selectedWeapon;
         private NextActionInfo nextAction = new NextActionInfo(NextAction.Move);
+        private int numbersOfPlayers = 2;
 
         public Index()
         {
             game = new GameManager();
-            game.NewGame(2);
+            game.NewGame(numbersOfPlayers);
         }
 
         private void RadioButtonClicked(string weapon)

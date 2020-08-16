@@ -1,5 +1,4 @@
 ﻿@page "/"
-@using GameOverBoardGame.Model;
 @using GameOverBoardGame.Enums;
 
 <h1>GameOver board game</h1>
@@ -20,7 +19,12 @@
 </div>
 
 <div class="infoPanel">
-    <button @onclick="(() => game.NewGame(2))">RESET</button>
+    Wybierz liczbę graczy:
+    <label><input type="radio" name="playersNumber" checked="@(numbersOfPlayers == 2)" @onchange="@(() => numbersOfPlayers = 2)" />2</label>
+    <label><input type="radio" name="playersNumber" checked="@(numbersOfPlayers == 3)" @onchange="@(() => numbersOfPlayers = 3)" />3</label>
+    <label><input type="radio" name="playersNumber" checked="@(numbersOfPlayers == 4)" @onchange="@(() => numbersOfPlayers = 4)" />4</label>
+
+    <button @onclick="(() => game.NewGame(numbersOfPlayers))">RESET</button>
     <br />
 
     Wybierz broń:
@@ -38,7 +42,7 @@
         @nextAction.Information
     </div>
     <div>
-        
+
         @if (nextAction.NextAction == NextAction.GameOver)
         {
             <div class="alert alert-info" role="alert">
