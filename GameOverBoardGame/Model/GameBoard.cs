@@ -51,19 +51,15 @@ namespace GameOverBoardGame.Model
             DrawBoard();
         }
 
-        private Dictionary<int, Player> GetPlayers()
+        private Dictionary<Point, Player> GetPlayers()
         {
-            var players = new Dictionary<int, Player>(numberOfPlayers)
+            var players = new Dictionary<Point, Player>(numberOfPlayers)
             {
-                { 1, new Player(PlayerType.Girl) },
-                { 2, new Player(PlayerType.Handsome) }
+                { new Point(1, 0), new Player(PlayerType.Girl) },
+                { new Point(6, 1), new Player(PlayerType.Handsome) },
+                { new Point(5, 6), new Player(PlayerType.Fat) },
+                { new Point(0, 5), new Player(PlayerType.Scared) }
             };
-
-            if (numberOfPlayers >= 3)
-                players.Add(3, new Player(PlayerType.Fat));
-            if (numberOfPlayers >= 4)
-                players.Add(4, new Player(PlayerType.Scared));
-
             return players;
         }
 
@@ -80,7 +76,7 @@ namespace GameOverBoardGame.Model
                 {
                     if (IsPlayerPoint(i, j))
                     {
-                        Board[i, j] = new GamePiece(PieceStyle.Player, GetPlayers()[playerIdx]);
+                        Board[i, j] = new GamePiece(PieceStyle.Player, GetPlayers()[new Point(i,j)]);
                         playerIdx++;
                         continue;
                     }
