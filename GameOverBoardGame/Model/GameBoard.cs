@@ -107,6 +107,16 @@ namespace GameOverBoardGame.Model
                 };
             }
 
+            if (numberOfPlayers == 3)
+            {
+                return new List<Point>
+                {
+                    new Point(1, 0),
+                    new Point(0, 5),
+                    new Point(5, 6),
+                };
+            }
+
             return new List<Point>
             {
                 new Point(1, 0),
