@@ -19,24 +19,29 @@ namespace GameOverBoardGame.Model
 
         public NextAction DoAction(Card card)
         {
+            NextAction? result = NextAction.Move;
+
             if (card.Type == CardType.Dragon)
-                return NextAction.GameOverAndReplaceDragonCard;
+                result = NextAction.GameOverAndReplaceDragonCard;
 
             if (card.Type == CardType.Enemy)
             {
                 bool fightResult = card.Weapon == ChoosenWeapon;
                 if (fightResult == false)
-                    return NextAction.GameOver;
+                    result = NextAction.GameOver;
                 else
-                    return NextAction.Move;
+                    result = NextAction.Move;
             }
 
             if (card.Type == CardType.Door)
             {
-                return NextAction.Teleport;
+                result = NextAction.Teleport;
             }
 
             VisitedCards.Add(card);
+
+            Console.WriteLine("Visited cards:");
+            VisitedCards.ForEach(x => Console.WriteLine(x));
 
             if (VisitedCards.Count >= 2)
             {
@@ -46,7 +51,13 @@ namespace GameOverBoardGame.Model
                         x.ChestOwner == Type) == 1)
                         return NextAction.GameWin;
             }
-            return NextAction.Move;
+
+            if (result == NextAction.GameOver ||
+                result == NextAction.GameOverAndReplaceDragonCard ||
+                result == NextAction.GameWin)
+                VisitedCards.Clear();
+
+            return result.Value;
         }
 
         public override string ToString()
