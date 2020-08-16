@@ -24,6 +24,7 @@ namespace GameOverBoardGame.Model
         {
             PlayerIndexCurrentTurn = 1;
             isGameOver = false;
+            previousAction = NextAction.Move;
             GameBoard = new GameBoard(numberOfPlayers);
             SetPlayers(numberOfPlayers);
         }

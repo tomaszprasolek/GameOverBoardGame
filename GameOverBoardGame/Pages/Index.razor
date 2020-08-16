@@ -24,7 +24,7 @@
     <label><input type="radio" name="playersNumber" checked="@(numbersOfPlayers == 3)" @onchange="@(() => numbersOfPlayers = 3)" />3</label>
     <label><input type="radio" name="playersNumber" checked="@(numbersOfPlayers == 4)" @onchange="@(() => numbersOfPlayers = 4)" />4</label>
 
-    <button @onclick="(() => game.NewGame(numbersOfPlayers))">RESET</button>
+    <button @onclick="(() => NewGame())">RESET</button>
     <br />
 
     Wybierz broń:

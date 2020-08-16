@@ -32,5 +32,11 @@ namespace GameOverBoardGame.Pages
             nextAction = new NextActionInfo(NextAction.Move);
             game.NextPlayer();
         }
+
+        private void NewGame()
+        {
+            nextAction = new NextActionInfo(NextAction.Move);
+            game.NewGame(numbersOfPlayers);
+        }
     }
 }
