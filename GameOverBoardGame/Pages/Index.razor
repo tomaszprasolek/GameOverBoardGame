@@ -30,7 +30,11 @@
     Wybierz broń:
     @foreach (var item in Enum.GetNames(typeof(Weapon)))
     {
-        <label><input type="radio" name="weapon" value="@item" @onclick="(() => RadioButtonClicked(item))"> @item</label>
+
+        <input type="radio" class="input-hidden" id="@item" name="weapon" value="@item" @onclick="(() => RadioButtonClicked(item))">
+        <label for="@item">
+            <img src="/images/@(item).png" />
+        </label>
     }
 
     <br />

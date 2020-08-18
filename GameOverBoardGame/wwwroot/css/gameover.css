@@ -101,3 +101,12 @@
     background-image: url("../images/Hidden.png");
     background-repeat: no-repeat;
 }
+
+.input-hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+input[type=radio]:checked + label > img {
+    box-shadow: 0 0 3px 3px #090;
+}
