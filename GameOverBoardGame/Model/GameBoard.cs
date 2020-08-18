@@ -45,6 +45,12 @@ namespace GameOverBoardGame.Model
             previousPoint = null;
         }
 
+        public Player GetCurrentPlayer(int playerIdx)
+        {
+            var point = GetPlayersPointOnBoard()[playerIdx - 1];
+            return GetPlayers()[point];
+        }
+
         private void Reset()
         {
             ShuffleCards();
