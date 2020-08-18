@@ -27,7 +27,7 @@
     <button @onclick="(() => NewGame())">RESET</button>
     <br />
 
-    Wybierz broń:
+    Wybierz broń:<br />
     @foreach (var item in Enum.GetNames(typeof(Weapon)))
     {
 
@@ -38,10 +38,14 @@
     }
 
     <br />
+    <p>Wybrana broń: <b>@selectedWeapon</b></p>
     <hr />
 
-    <p>Wybrana broń: <b>@selectedWeapon</b></p>
-    <p>Aktualny gracz: <b>@game.CurrentPlayer.ToString()</b></p>
+    Aktualny gracz: <br />
+    <img src="/images/Player@(game.CurrentPlayer.ToString()).png" />
+
+    <hr />
+
     <div class="alert alert-@nextAction.AlertType" role="alert">
         @nextAction.Information
     </div>
