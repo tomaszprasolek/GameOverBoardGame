@@ -4,17 +4,13 @@ namespace GameOverBoardGame.Model
 {
     public class GameManager
     {
-        public GameBoard GameBoard { get; private set; }
-
         private int PlayerIndexCurrentTurn = 1;
-
-        public Player CurrentPlayer { get; private set; }
-
         private bool isGameOver = false;
-
         private NextAction? previousAction;
-
         private int numberOfPlayers;
+
+        public GameBoard GameBoard { get; private set; }     
+        public Player CurrentPlayer { get; private set; }    
 
         /// <summary>
         /// Nowa gra
