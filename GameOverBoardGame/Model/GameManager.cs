@@ -1,5 +1,4 @@
 ﻿using GameOverBoardGame.Enums;
-using System.Collections.Generic;
 
 namespace GameOverBoardGame.Model
 {
@@ -9,7 +8,7 @@ namespace GameOverBoardGame.Model
 
         private int PlayerIndexCurrentTurn = 1;
 
-        public Player CurrentPlayer => GameBoard.GetCurrentPlayer(PlayerIndexCurrentTurn);
+        public Player CurrentPlayer { get; private set; }
 
         private bool isGameOver = false;
 
@@ -29,6 +28,7 @@ namespace GameOverBoardGame.Model
             isGameOver = false;
             previousAction = NextAction.Move;
             GameBoard = new GameBoard(numberOfPlayers);
+            SetCurrentPlayer();
         }
 
         public void NextPlayer()
@@ -43,6 +43,7 @@ namespace GameOverBoardGame.Model
                 nextPlayerIdx = 1;
 
             PlayerIndexCurrentTurn = nextPlayerIdx;
+            SetCurrentPlayer();
         }
 
         public NextActionInfo PieceClicked(int x, int y, Weapon selectedWeapon)
@@ -86,6 +87,11 @@ namespace GameOverBoardGame.Model
 
             previousAction = res;
             return new NextActionInfo(res);
+        }
+
+        private void SetCurrentPlayer()
+        {
+            CurrentPlayer = GameBoard.GetCurrentPlayer(PlayerIndexCurrentTurn);
         }
     }
 }
